@@ -1,0 +1,19 @@
+name: demo-vikas-01
+owner: vikas.raut
+team: ds
+env: dev
+region: europe-west2
+
+workbench:
+  machine_type: n1-standard-4
+  disk_gb: 100
+  disable_public_ip: true
+  idle_shutdown_minutes: 60
+
+labels:
+  app: ds-workbench
+  cost_center: ml
+  owner: vikas
+  env: dev
+
+ttl_hours: 24
