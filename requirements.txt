@@ -1,0 +1,6 @@
+pandas
+numpy
+scikit-learn
+pyyaml
+google-cloud-aiplatform
+kfp

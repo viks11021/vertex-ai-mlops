@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local artifacts
+models/
+out/
+*.joblib
+
+# OS
+.DS_Store
