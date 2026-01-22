@@ -1,0 +1,36 @@
+name: validate-requests
+
+on:
+  pull_request:
+    paths:
+      - "requests/**/*.yaml"
+      - "src/common/validate_request.py"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Validate changed request files
+        run: |
+          set -euo pipefail
+          files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '^requests/.*\.ya?ml$' || true)
+          if [ -z "${files}" ]; then
+            echo "No request files changed."
+            exit 0
+          fi
+          for f in ${files}; do
+            echo "Validating ${f}"
+            python src/common/validate_request.py --file "${f}"
+          done
